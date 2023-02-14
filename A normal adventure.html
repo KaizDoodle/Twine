@@ -9,7 +9,7 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play A normal adventure.</tw-noscript></noscript></tw-story>
-<tw-storydata name="A normal adventure" startnode="1" creator="Twine" creator-version="2.6.1" format="Harlowe" format-version="3.3.4" ifid="4B28D55E-A1CB-4A2E-9A10-A2A70055964D" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-sidebar {
+<tw-storydata name="A normal adventure" startnode="1" creator="Twine" creator-version="2.6.1" format="Harlowe" format-version="3.3.4" ifid="4B28D55E-A1CB-4A2E-9A10-A2A70055964D" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-sidebar {
   position: fixed;
   top: 0;
   left: 0;
@@ -24,19 +24,19 @@ tw-icon {
   text-align: right;
   padding-right: 0.75em;
 }
-</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Untitled Passage" tags="donotshowinventory" position="100,0" size="100,100">&lt;h1&gt;Hello brave adventurer&lt;/h1&gt; 
+</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="BEGINNING" tags="donotshowinventory donotshowcolour donotshowstats" position="100,200" size="100,100">&lt;h1&gt;Hello brave adventurer&lt;/h1&gt; 
 
 This is the &lt;i&gt;character customization stage&lt;/i&gt; of the game. 
 
 The &lt;b&gt;default name&lt;/b&gt; is &lt;b&gt;John Jeremy Jones&lt;/b&gt; but you can change it with this link here or keep it 
-(link: &quot;Change name&quot;)[(set: $name to (prompt: &quot;What is your name?&quot;, &quot;John Jeremy Jones&quot;))
+(link: &quot;CHANGE NAME&quot;)[(set: $name to (prompt: &quot;What is your name?&quot;, &quot;John Jeremy Jones&quot;))
 
 (transition:&quot;fadeup&quot;)[
 Hello &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;(print:$name)&lt;/b&gt; Click this link to move onto the next step of your charecter creation] 
 (transition:&quot;fadeup&quot;)[
-[[Classes]]
-(replace: &quot;Hello brave adventurer This is the character customization stage of the game. The default name is John Jeremy Jones but you can change it with this link here or keep it&quot;)[]
 
+(replace: &quot;Hello brave adventurer This is the character customization stage of the game. The default name is John Jeremy Jones but you can change it with this link here or keep it&quot;)[]
+[[CLASSES]]
 ]
 ]
  
@@ -45,75 +45,121 @@ Hello &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;(print:$name)&lt;/b&gt; C
 	(set: $inv to (a: &quot;knife&quot;, &quot;rope&quot;, &quot;orcish axe&quot;))
 	(set: $inv to $inv - (a: &quot;knife&quot;,&quot;rope&quot;,&quot;orcish axe&quot;)) 
 		(set: _style to (text-style:&quot;shudder&quot;,&quot;smear&quot;), $word2 to &quot;Hello brave adventurer&quot;)(enchant:$word2, _style)
-		(set: _style to (text-style:&quot;buoy&quot;), $word to &quot;John Jeremy Jones&quot;)(enchant:$word, _style)
-</tw-passagedata><tw-passagedata pid="2" name="Feet" tags="footer" position="200,1100" size="100,100">
+		(set: _style1 to (text-style:&quot;buoy&quot;), $word to &quot;John Jeremy Jones&quot;)(enchant:$word, _style1)
+(set: $dex to 0)
+(set: $maxHP to 15)
+(set: $str to 0)
+(set: $wis to 0)
+(set: $int to 0)
+(set: $tiedup to true)
+(set: $orcHP to 30)
+(set: $orc1 to $orcHP)
+</tw-passagedata><tw-passagedata pid="2" name="Feet" tags="footer" position="0,375" size="100,100">
 
-(if: (passage:)&#39;s name is &quot;inventory&quot;)[&lt;!--Do nothing--&gt;]
-(else-if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;]
- (else:)[Check [[inventory]]]
- 
- (if: (passage:)&#39;s name is &quot;Colour legend&quot;)[&lt;!--Do nothing--&gt;]
- (else:)[[Colour legend]]</tw-passagedata><tw-passagedata pid="3" name="Thief" tags="donotshowinventory" position="700,400" size="100,100">Thiefs are agile assassins who sneak around in the shadows and silently assassinate people. Thiefs have are weak and fragile but have unrivaled dexterity and stealth
+(if: (passage:)&#39;s name is &quot;CHECK INVENTORY&quot;)[&lt;!--Do nothing--&gt;]
+(else-if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;] (else:)[[CHECK INVENTORY]] 
+(if: (passage:)&#39;s name is &quot;COLOUR LEGEND&quot;)[&lt;!--Do nothing--&gt;] (else-if: (passage:)&#39;s tags contains &quot;donotshowcolour&quot;)[&lt;!--Do nothing--&gt;](else:)[[COLOUR LEGEND]] 
+(if: (passage:)&#39;s name is &quot;CHECK STATS&quot;)[&lt;!--Do nothing--&gt;] (else-if: (passage:)&#39;s tags contains &quot;donotshowstats&quot;)[&lt;!--Do nothing--&gt;](else:)[[CHECK STATS]]
+(if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;](else:)[
+(display: &quot;func:healthbar&quot;)
+]
+	(if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;]
+	(else-if:(passage:)&#39;s name is &quot;COLOUR LEGEND&quot;)[&lt;!--Do nothing--&gt;]
+	(else-if:(passage:)&#39;s name is &quot;CHECK INVENTORY&quot;)[&lt;!--Do nothing--&gt;]
+	(else-if:(passage:)&#39;s name is &quot;CHECK STATS&quot;)[&lt;!--Do nothing--&gt;]
+	(else:)[
+		(if: (passage:)&#39;s name is &quot;DEAD&quot;)[&lt;!--Do nothing--&gt;]
+		(else:)[
+			(if: $currentHP &lt; 1)[(go-to: &quot;DEAD&quot;)]
+]
+]
+</tw-passagedata><tw-passagedata pid="3" name="THIEF" tags="donotshowinventory donotshowstats" position="600,200" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+&lt;h3&gt;Theif&lt;/h3&gt;
+Thiefs are agile assassins who sneak around in the shadows and silently assassinate people. Thiefs are weak and fragile but have unrivaled dexterity and stealth.
 
 &lt;b style=&quot;color:Yellow;&quot;&gt;
-Dexterity: affects your stealth and dodge (+2)
-Base health: affects your health, duh, (0)
+Dexterity: affects your stealth and dodge (+3)
+Max health: affects your health, duh, (-2)
 Strength: affects your damage (+2)
 Wisdom: affects your knowledge and with high enough wisdom unlocks certain options(0)
-Intelligence: affects your ability to trick people and complete some tasks (0)
-&lt;/b&gt;
-[[Classes]]</tw-passagedata><tw-passagedata pid="4" name="Warrior" tags="donotshowinventory" position="700,0" size="100,100">A warrior is a tanky fighter who uses heavy weapons. Warriors aren&#39;t &quot;the smartest tool in the shed&quot; but they make up for this with their unrivaled strength.
-
-&lt;b style=&quot;color:Yellow;&quot;&gt;
-Dexterity: affects your stealth and dodge (0)
-Base health: affects your health, duh, (+2)
-Strength: affects your damage (+2)
-Wisdom: affects your knowledge and with high enough wisdom unlocks certain options(0)
-Intelligence: affects your ability to trick people and complete some tasks (0)
-&lt;/b&gt;
-[[Classes]]</tw-passagedata><tw-passagedata pid="5" name="Cleric" tags="donotshowinventory" position="700,200" size="100,100">The Cleric is a gentle healer who uses a variety of holy spells to heal others and cleanse status effects. Clerics are very weak and fragile but make up for this with their high wisdom and connection to god.
-
-&lt;b style=&quot;color:Yellow;&quot;&gt;
-Dexterity: affects your stealth and dodge (0)
-Base health: affects your health, duh, (+1)
-Strength: affects your damage (0)
-Wisdom: affects your knowledge and with high enough wisdom unlocks certain options(+2)
 Intelligence: affects your ability to trick people and complete some tasks (+1)
 &lt;/b&gt;
-[[Classes]]</tw-passagedata><tw-passagedata pid="6" name="Ranger" tags="donotshowinventory" position="700,600" size="100,100">Rangers are smart forest people who attack from afar with ranged weapons.
-Rangers are weak and fragile but have high inteligence and strong dexterity 
+
+[[CLASSES]]
+[[CONFIRM-&gt;ThConfirm]]
+]</tw-passagedata><tw-passagedata pid="4" name="WARRIOR" tags="donotshowinventory donotshowstats" position="800,200" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+&lt;h3&gt;Warrior&lt;/h3&gt;
+The warrior is a tanky fighter who uses heavy weapons. Warriors aren&#39;t &quot;the smartest tool in the shed&quot; but they make up for this with their unrivaled strength.
 
 &lt;b style=&quot;color:Yellow;&quot;&gt;
-Dexterity: affects your stealth and dodge (+2)
-Base health: affects your health, duh, (0)
-Strength: affects your damage (0)
+Dexterity: affects your stealth and dodge (0)
+Max health: affects your health, duh, (+2)
+Strength: affects your damage (+3)
 Wisdom: affects your knowledge and with high enough wisdom unlocks certain options(0)
+Intelligence: affects your ability to trick people and complete some tasks (-1)
+&lt;/b&gt;
+
+[[CLASSES]]
+[[CONFIRM-&gt;WaConfirm]]
+]</tw-passagedata><tw-passagedata pid="5" name="CLERIC" tags="donotshowinventory donotshowstats" position="1000,200" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+&lt;h3&gt;Cleric&lt;/h3&gt;
+The Cleric is a gentle healer who uses a variety of holy spells to heal others and cleanse status effects. Clerics are very weak and fragile but make up for this with their high wisdom and connection to god.
+
+&lt;b style=&quot;color:Yellow;&quot;&gt;
+Dexterity: affects your stealth and dodge (0)
+Max health: affects your health, duh, (+1)
+Strength: affects your damage (-1)
+Wisdom: affects your knowledge and with high enough wisdom unlocks certain options(+2)
 Intelligence: affects your ability to trick people and complete some tasks (+2)
 &lt;/b&gt;
-[[Classes]]</tw-passagedata><tw-passagedata pid="7" name="Classes" tags="donotshowinventory" position="300,0" size="100,100">Which of these classes would you like. 
 
-You may not change them later in the story and the class you pick may affect the paths later in the story
+[[CLASSES]]
+[[CONFIRM-&gt;ClConfirm]]
+]</tw-passagedata><tw-passagedata pid="6" name="RANGER" tags="donotshowinventory donotshowstats" position="1200,200" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+&lt;h3&gt;Ranger&lt;/h3&gt;
+Rangers are smart forest people who attack from afar with ranged weapons. Rangers are weak and fragile but have high inteligence and strong dexterity 
+
+&lt;b style=&quot;color:Yellow;&quot;&gt;
+Dexterity: affects your stealth and dodge (+2)
+Max health: affects your health, duh, (-1)
+Strength: affects your damage (0)
+Wisdom: affects your knowledge and with high enough wisdom unlocks certain options(0)
+Intelligence: affects your ability to trick people and complete some tasks (+3)
+&lt;/b&gt;
+
+[[CLASSES]]
+[[CONFIRM-&gt;RaConfirm]]
+]</tw-passagedata><tw-passagedata pid="7" name="CLASSES" tags="donotshowinventory donotshowstats" position="1000,0" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+&lt;h3&gt;Which of these classes would you like? &lt;/h3&gt;
+
+You may not change them later in the story and the class you pick may affect the paths later on in the story.
+
+
 
 Click on one of these links to learn more about the classes then you may select one.
-[[Thief]]
-[[Warrior]]
-[[Cleric]]
-[[Ranger]]
-[[Wizard]]</tw-passagedata><tw-passagedata pid="8" name="Wizard" tags="donotshowinventory" position="700,800" size="100,100">Wizards are smart old people who attack with magic. They aren&#39;t a barbarian by anymeans but they use some spells which will probably take me way too long to add in so don&#39;t complain if they aren&#39;t very good
+[[THIEF]]
+[[WARRIOR]]
+[[CLERIC]]
+[[RANGER]]
+[[WIZARD]]
+]</tw-passagedata><tw-passagedata pid="8" name="WIZARD" tags="donotshowinventory donotshowstats" position="1400,200" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+&lt;h3&gt;Wizard&lt;/h3&gt;
+Wizards are smort old people who attack with magic. They aren&#39;t a barbarian by anymeans but they use some spells which will probably take me way too long to add in so don&#39;t complain if they aren&#39;t very good
 
 &lt;b style=&quot;color:Yellow;&quot;&gt;
 Dexterity: affects your stealth and dodge (0)
-Base health: affects your health, duh, (0)
-Strength: affects your damage (-999999999999) (this is a joke its just 0)
+Max health: affects your health, duh, (0)
+Strength: affects your damage (-1)
 Wisdom: affects your knowledge allowing you to unlock certain options(+3)
-Intelligence: affects your ability to trick people and complete some tasks (+1)
+Intelligence: affects your ability to trick people and complete some tasks (+2)
 &lt;/b&gt;
-[[Classes]]
-</tw-passagedata><tw-passagedata pid="9" name="inventory" tags="" position="400,1100" size="100,100">&lt;h2&gt;Inventory&lt;/h2&gt;
+[[CLASSES]]
+[[CONFIRM-&gt;WiConfirm]]
+]</tw-passagedata><tw-passagedata pid="9" name="CHECK INVENTORY" tags="" position="0,600" size="100,100">&lt;h3&gt;Inventory&lt;/h3&gt;
 (if: $inv&#39;s length &gt; 0)[Your inventory contains a (print: $inv).]
 (else:)[Your inventory is empty.]
 
-(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="10" name="Colour legend" tags="donotshowinventory" position="600,1100" size="100,100">&lt;h3&gt;Colour legend&lt;/h3&gt;
+(link-goto: &quot;RETURN&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="10" name="COLOUR LEGEND" tags="donotshowinventory" position="100,600" size="100,100">&lt;h3&gt;Colour legend&lt;/h3&gt;
 &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;The green colour is for your name&lt;/b&gt;
 &lt;b style=&quot;color:Blue;&quot;&gt;The blue colour is for links&lt;/b&gt;
 The white colour is for general text
@@ -121,7 +167,361 @@ The white colour is for general text
 &lt;b style=&quot;color:Red;&quot;&gt;The red colour is for health&lt;/b&gt;
 &lt;b style=&quot;color:Aquamarine;&quot;&gt;The Aquamarine colour is for items &lt;/b&gt;
 
-(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata></tw-storydata>
+(link-goto: &quot;RETURN&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="11" name="ThConfirm" tags="donotshowinventory" position="600,400" size="100,100">(set:$class to &quot;Thief&quot;)
+(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[Great job &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;$name&lt;/b&gt; you have now chosen the class $class and gained whichever stats are assoiated with that class. You can check your stats throughout the story with the link CHECK STATS at the bottom.
+
+It is now time to chose a race.
+You may not change them later in the story and the race you pick may affect the paths later in the story
+
+Click on one of these links to learn more about the races then you may select one.
+[[DWARF]] 
+[[ELF]] 
+[[HUMAN]]
+[[HALF-ORC]] 
+[[DRAGONBORN]]
+]
+
+(set: $dex to it +3)
+(set: $maxHP to it -2)
+(set: $str to it +2)
+(set: $wis to it +0)
+(set: $int to it +1)</tw-passagedata><tw-passagedata pid="12" name="ClConfirm" tags="donotshowinventory" position="1000,400" size="100,100">(set:$class to &quot;Cleric&quot;)
+(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[Great job &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;$name&lt;/b&gt; you have now chosen the class $class and gained whichever stats are assoiated with that class. You can check your stats throughout the story with the link CHECK STATS at the bottom.
+
+It is now time to chose a race.
+You may not change them later in the story and the race you pick may affect the paths later in the story
+
+Click on one of these links to learn more about the race then you may select one.
+[[DWARF]] 
+[[ELF]] 
+[[HUMAN]]
+[[HALF-ORC]] 
+[[DRAGONBORN]]
+]
+
+(set: $dex to it +0)
+(set: $maxHP to it +1)
+(set: $str to it -1)
+(set: $wis to it +2)
+(set: $int to it +2)</tw-passagedata><tw-passagedata pid="13" name="WaConfirm" tags="donotshowinventory" position="800,400" size="100,100">(set:$class to &quot;Warrior&quot;)
+(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[Great job &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;$name&lt;/b&gt; you have now chosen the class $class and gained whichever stats are assoiated with that class. You can check your stats throughout the story with the link CHECK STATS at the bottom.
+
+It is now time to chose a race.
+You may not change them later in the story and the race you pick may affect the paths later in the story
+
+Click on one of these links to learn more about the races then you may select one.
+[[DWARF]] 
+[[ELF]] 
+[[HUMAN]]
+[[HALF-ORC]] 
+[[DRAGONBORN]]
+]
+
+(set: $dex to it +0)
+(set: $maxHP to it +2)
+(set: $str to it +3)
+(set: $wis to it +0)
+(set: $int to it -1)</tw-passagedata><tw-passagedata pid="14" name="RaConfirm" tags="donotshowinventory" position="1200,400" size="100,100">(set:$class to &quot;Ranger&quot;)
+(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[Great job &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;$name&lt;/b&gt; you have now chosen the class $class and gained whichever stats are assoiated with that class. You can check your stats throughout the story with the link CHECK STATS at the bottom.
+
+It is now time to chose a race.
+You may not change them later in the story and the race you pick may affect the paths later in the story
+
+Click on one of these links to learn more about the races then you may select one.
+[[DWARF]] 
+[[ELF]] 
+[[HUMAN]]
+[[HALF-ORC]] 
+[[DRAGONBORN]]
+]
+
+(set: $dex to it +2)
+(set: $maxHP to it -1)
+(set: $str to it +0)
+(set: $wis to it +0)
+(set: $int to it +3)</tw-passagedata><tw-passagedata pid="15" name="WiConfirm" tags="donotshowinventory" position="1400,400" size="100,100">(set:$class to &quot;Wizard&quot;)
+(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[Great job &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;$name&lt;/b&gt; you have now chosen the class $class and gained whichever stats are assoiated with that class. You can check your stats throughout the story with the link CHECK STATS at the bottom.
+
+It is now time to chose a race.
+You may not change them later in the story and the race you pick may affect the paths later in the story
+
+Click on one of these links to learn more about the races then you may select one.
+[[DWARF]] 
+[[ELF]] 
+[[HUMAN]]
+[[HALF-ORC]] 
+[[DRAGONBORN]]
+]
+
+(set: $dex to it +0)
+(set: $maxHP to it +0)
+(set: $str to it -1)
+(set: $wis to it +3)
+(set: $int to it +2)</tw-passagedata><tw-passagedata pid="16" name="CHECK STATS" tags="" position="200,600" size="100,100">&lt;h3&gt;Stats&lt;/h3&gt;
+&lt;b style=&quot;color:Yellow;&quot;&gt; 
+Class: (print: $class)
+Dexterity: (print: $dex)
+Max Health: (print: $maxHP)
+Strength: (print: $str)
+Wisdom: (print: $wis)
+Intelligence: (print: $int)
+&lt;/b&gt;
+(link-goto: &quot;RETURN&quot;, (history:)&#39;s last) 
+</tw-passagedata><tw-passagedata pid="17" name="DWARF" tags="donotshowinventory" position="600,800" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+&lt;h3&gt;Dwarf&lt;/h3&gt;
+Dwarfs are ...well dwarfs (it kinda says it in the name). They are much shorter than humans but bare a resemblence to them. Dwarfs are known for their unusual strength small size and massive life spans.
+
+
+
+&lt;b style=&quot;color:Yellow;&quot;&gt;
+Dexterity: affects your stealth and dodge (-1)
+Max health: affects your health, duh, (+2)
+Strength: affects your damage (+2)
+Wisdom: affects your knowledge and with high enough wisdom unlocks certain options(+1)
+Intelligence: affects your ability to trick people and complete some tasks (0)
+&lt;/b&gt;
+
+[[CONFIRM-&gt;DwConfirm]]
+
+[[RACES]]
+]</tw-passagedata><tw-passagedata pid="18" name="ELF" tags="donotshowinventory" position="800,800" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+&lt;h3&gt;Elf&lt;/h3&gt;
+Ah elfs. My personal favorite race. These forest humans hold a special place in my heart and when playing dnd I just can&#39;t help but pick them. Elfs (if you don&#39;t know what they are) are basicly slender humans with pointy ears and longer life spans. They aren&#39;t the strongest but they make up for this with their amazing dexterity, intelligence and pointy ears
+&lt;b style=&quot;color:Yellow;&quot;&gt;
+Dexterity: affects your stealth and dodge (+3)
+Max health: affects your health, duh, (-1)
+Strength: affects your damage (+1)
+Wisdom: affects your knowledge and with high enough wisdom unlocks certain options(+1)
+Intelligence: affects your ability to trick people and complete some tasks (+1)
+&lt;/b&gt;
+
+[[CONFIRM-&gt;ElConfirm]]
+[[RACES]]
+]</tw-passagedata><tw-passagedata pid="19" name="HUMAN" tags="donotshowinventory" position="1000,800" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+&lt;h3&gt;Human&lt;/h3&gt;
+Whoa a human thats like you (I hope). I think you know enough about humans but they are basically big dwarfs or small giants. Humans are great all rounders for people who hate to min max. 
+&lt;b style=&quot;color:Yellow;&quot;&gt;
+Dexterity: affects your stealth and dodge (+1)
+Max health: affects your health, duh, (+1)
+Strength: affects your damage (+1)
+Wisdom: affects your knowledge and with high enough wisdom unlocks certain options( +0)
+Intelligence: affects your ability to trick people and complete some tasks (+1)
+&lt;/b&gt;
+
+[[CONFIRM-&gt;HuConfirm]]
+[[RACES]]
+]</tw-passagedata><tw-passagedata pid="20" name="DRAGONBORN" tags="donotshowinventory" position="1400,800" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+&lt;h3&gt;Dragonborn&lt;/h3&gt;
+No this isn&#39;t a dragon soul consuming hero. Its just a mixture between a human and a dragon. Basicly a scaly human that doesn&#39;t speak english.
+&lt;b style=&quot;color:Yellow;&quot;&gt;
+Dexterity: affects your stealth and dodge (0)
+Max health: affects your health, duh, (+1)
+Strength: affects your damage (+2)
+Wisdom: affects your knowledge and with high enough wisdom unlocks certain options(+1)
+Intelligence: affects your ability to trick people and complete some tasks (0)
+&lt;/b&gt;
+
+[[CONFIRM-&gt;DrConfirm]]
+[[RACES]]
+]</tw-passagedata><tw-passagedata pid="21" name="HuConfirm" tags="donotshowinventory" position="1000,900" size="100,100">(set:$race to &quot;Human&quot;)
+(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[Congratulations &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;$name&lt;/b&gt; you have selected the race $race and  the charecter setup stage has now been completed and you can now begin your story remeber you can always check your stats inventory and the colour legend if you need. I don&#39;t want to format it so you may need to scroll down in order to see them.
+
+You are ready to start your story brave adventurer 
+click here to Start at the beginning [[START]]
+click here to start at a check point you made it to
+click here to go back to the very start and recustomise your charecter [[BEGINNING]]
+]
+(set: $dex to it +1)
+(set: $maxHP to it +1)
+(set: $str to it +1)
+(set: $wis to it +0)
+(set: $int to it +1)</tw-passagedata><tw-passagedata pid="22" name="ElConfirm" tags="donotshowinventory" position="800,900" size="100,100">(set:$race to &quot;Elf&quot;)
+(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[Congratulations &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;$name&lt;/b&gt; you have selected the race $race and  the charecter setup stage has been now completed and you can now begin your story remeber you can always check your stats inventory and the colour legend if you need. I don&#39;t want to format it so you may need to scroll down in order to see them.
+
+You are ready to start your story brave adventurer 
+click here to Start at the beginning [[START]]
+click here to start at a check point you made it to
+click here to go back to the very start and recustomise your charecter [[BEGINNING]]
+]
+(set: $dex to it +3)
+(set: $maxHP to it -1)
+(set: $str to it +0)
+(set: $wis to it +1)
+(set: $int to it +1)</tw-passagedata><tw-passagedata pid="23" name="DwConfirm" tags="donotshowinventory" position="600,900" size="100,100">(set:$race to &quot;Dwarf&quot;)
+(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[Congratulations &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;$name&lt;/b&gt; you have selected the race $race and  the charecter setup stage has now been completed and you can now begin your story remeber you can always check your stats inventory and the colour legend if you need. I don&#39;t want to format it so you may need to scroll down in order to see them.
+
+You are ready to start your story brave adventurer 
+click here to Start at the beginning [[START]]
+click here to start at a check point you made it to
+click here to go back to the very start and recustomise your charecter [[BEGINNING]]
+]
+(set: $dex to it -1)
+(set: $maxHP to it +2)
+(set: $str to it +2)
+(set: $wis to it +1)
+(set: $int to it +0)
+</tw-passagedata><tw-passagedata pid="24" name="HoConfirm" tags="donotshowinventory" position="1200,900" size="100,100">(set:$race to &quot;Half-orc&quot;)
+(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[Congratulations &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;$name&lt;/b&gt; you have selected the race $race and  the charecter setup stage has now been completed and you can now begin your story remeber you can always check your stats inventory and the colour legend if you need. I don&#39;t want to format it so you may need to scroll down in order to see them.
+
+You are ready to start your story brave adventurer 
+click here to Start at the beginning [[START]]
+click here to start at a check point you made it to
+click here to go back to the very start and recustomise your charecter [[BEGINNING]]
+]
+(set: $dex to it -1)
+(set: $maxHP to it +2)
+(set: $str to it +4)
+(set: $wis to it +0)
+(set: $int to it -1)</tw-passagedata><tw-passagedata pid="25" name="DrConfirm" tags="donotshowinventory" position="1400,900" size="100,100">(set:$race to &quot;Dragonborn&quot;)
+(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[Congratulations &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;$name&lt;/b&gt; you have selected the race $race and  the charecter setup stage has now been completed and you can now begin your story remeber you can always check your stats inventory and the colour legend if you need. I don&#39;t want to format it so you may need to scroll down in order to see them.
+
+You are ready to start your story brave adventurer 
+click here to Start at the beginning [[START]]
+click here to start at a check point you made it to
+click here to go back to the very start and recustomise your charecter [[BEGINNING]]
+]
+(set: $dex to it +0)
+(set: $maxHP to it +1)
+(set: $str to it +2)
+(set: $wis to it +1)
+(set: $int to it +0)</tw-passagedata><tw-passagedata pid="26" name="RACES" tags="donotshowinventory" position="1000,600" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[Great job &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;$name&lt;/b&gt; you have now chosen your class and gained whichever stats are assoiated with that class. You can check your stats throughout the story with the link CHECK STATS at the bottom.
+
+It is now time to chose a race.
+You may not change them later in the story and the race you pick may affect the paths later in the story
+
+Click on one of these links to learn more about the races then you may select one.
+[[DWARF]] 
+[[ELF]] 
+[[HUMAN]]
+[[HALF-ORC]] 
+[[DRAGONBORN]]
+]</tw-passagedata><tw-passagedata pid="27" name="START" tags="donotshowinventory" position="1000,1100" size="100,100">(set: $maxHP to 20)
+(set: $currentHP to $maxHP)
+
+(transition:&quot;blur&quot;) + (transition-time: 5s)[
+&lt;h3&gt;Start&lt;/h3&gt;(if:$race is &quot;Half-orc&quot;)[
+You wake up feeling disoriented and drunk. You must have been pretty drunk because you can&#39;t remember anything about your life up until this point.
+]
+
+(else:)[You wake up feeling disoriented and in large amount of pain. Your wrists and ankles feel numb. You must have hit your head pretty hard because you can&#39;t remember anything about your life up until this point.
+]
+[[LOOK AROUND]]
+[[FALL ASLEEP]]
+[[SHOUT]]
+]
+
+(set: $inv to (a: &quot;knife&quot;, &quot;rope&quot;, &quot;orcish axe&quot;))
+	(set: $inv to $inv - (a: &quot;knife&quot;,&quot;rope&quot;,&quot;orcish axe&quot;))</tw-passagedata><tw-passagedata pid="28" name="LOOK AROUND" tags="" position="800,1300" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+(if:$race is &quot;Half-orc&quot;)[
+Your eyes start to adjust and you can see you&#39;re in a camp full of orc&#39;s you notice an elf tied to a tree and a weapon rack sitting near one of the orcs
+[[ATTACK THEM]]
+[[PRETEND TO PLAY DEAD]] 
+[[WALK OVER TO THE WEAPON RACK]] 
+]
+
+(else:)[Your eyes start to adjust and you can make out your surroundings. You apear to be in a orc camp with your hands and ankles tied to a tree.
+
+[[PRETEND TO PLAY DEAD]]
+[[ATTACK THEM]]
+[[YELL AT THEM]]
+]
+
+]
+
+</tw-passagedata><tw-passagedata pid="29" name="PRETEND TO PLAY DEAD" tags="" position="600,1600" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+(if:$race is &quot;Half-orc&quot;)[ The other orcs in the camp think you died from drinking and decide to feed you to the dogs [[BEGINNING]] ]
+(else:)[ the orcs think that you died and thow you out to the dogs [[BEGINNING]] ]
+]</tw-passagedata><tw-passagedata pid="30" name="ATTACK THEM" tags="" position="700,1600" size="100,100">(set: _style1 to (text-style:&quot;shudder&quot;,&quot;smear&quot;), $word to &quot;WHAT THE HELL HALF ORC WANT TO DIE MY GOOD FRIEND&quot;)(enchant:$word, _style1)
+(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+(if:$race is &quot;Half-orc&quot;)[
+	(set: $orcdamage to (random: 10,15 ))
+	(set: $currentHP to $currentHP - $orcdamage)
+	(set: $damage to (random: 1,10 )+$str)
+	(set: $orc1 to $orc1- $damage)
+You walk up to an orc and attack one dealing $damage damage (if: $orc1 &lt; 1)[killing the orc](else:)[the orc shouts out &lt;b1&gt;WHAT THE HELL HALF ORC WANT TO DIE MY GOOD FRIEND&lt;/b&gt; he hits you in the face dealing (print: $orcdamage)
+]]
+
+(else:)[
+You attempt to attack the large figure but fail because your tied to a tree. One of the orcs  notices you squirming and walks over to you. He picks you up by the hair and laughs at you.
+]
+
+
+]
+
+
+</tw-passagedata><tw-passagedata pid="31" name="Hax" tags="" position="2600,225" size="100,100">&lt;h1&gt;Hello brave adventurer&lt;/h1&gt;
+
+This is the &lt;i&gt;character customization stage&lt;/i&gt; of the game. 
+
+The &lt;b&gt;default name&lt;/b&gt; is &lt;b&gt;John Jeremy Jones&lt;/b&gt; but you can change it with this link here or keep it 
+(link: &quot;CHANGE NAME&quot;)[(set: $name to (prompt: &quot;What is your name?&quot;, &quot;John Jeremy Jones&quot;))
+
+(transition:&quot;fadeup&quot;)[
+Hello &lt;b style=&quot;color:MediumSeaGreen;&quot;&gt;(print:$name)&lt;/b&gt; Click this link to move onto the next step of your charecter creation] 
+(transition:&quot;fadeup&quot;)[
+
+(replace: &quot;Hello brave adventurer This is the character customization stage of the game. The default name is John Jeremy Jones but you can change it with this link here or keep it&quot;)[]
+[[CLASSES]]
+]
+]
+ 
+
+	(set: $inv to (a:))
+	(set: $inv to (a: &quot;knife&quot;, &quot;rope&quot;, &quot;orcish axe&quot;))
+	(set: $inv to $inv - (a: &quot;knife&quot;,&quot;rope&quot;,&quot;orcish axe&quot;)) 
+		(set: _style to (text-style:&quot;shudder&quot;,&quot;smear&quot;), $word2 to &quot;Hello brave adventurer&quot;)(enchant:$word2, _style)
+		(set: _style1 to (text-style:&quot;buoy&quot;), $word to &quot;John Jeremy Jones&quot;)(enchant:$word, _style1)
+(set: $dex to -1000)
+(set: $hel to -1000)
+(set: $str to -1000)
+(set: $wis to -1000)
+(set: $int to -1000)
+(set: $tiedup to true)
+
+(set: $orc1 to 20)</tw-passagedata><tw-passagedata pid="32" name="func:healthbar" tags="" position="2075,950" size="100,100">{(set: $redRoughAmount to $currentHP / $maxHP)
+(set: $redPercent to (round: $redRoughAmount * 100))
+(set: $greenPercent to 100 - $redPercent)
+(set: $red5per to (round: $redPercent * .20)) &lt;!-- break it into 5% increments --&gt;
+(set: $green5per to 20 - $red5per)
+(set: $barLength to 20)
+(set: $healthBar to &quot;&quot;)
+
+(for: each _block, ...(range: 1 , $barLength))[
+	(if: _block is &lt;= $red5per)[
+		(set: $healthBar to it + &quot;❤️&quot;)
+		]
+	(else:)[
+		(set: $healthBar to it + &quot;🖤&quot;)
+		]
+	]
+(print: $healthBar)
+}</tw-passagedata><tw-passagedata pid="33" name="HALF-ORC" tags="donotshowinventory" position="1200,800" size="100,100">(char-style: via (t8n-delay:pos*5)+(t8n:&#39;dissolve&#39;))[
+&lt;h3&gt;Half-orc&lt;/h3&gt;
+Everybody knows  what an orc is and everybody knows what a human is. Now imagine an orc that is basicly less &quot;orcy&quot;. A bit less dumb and a bit less strong but a great middle area is where these elf hated creatures sit
+
+&lt;b style=&quot;color:Yellow;&quot;&gt;
+Dexterity: affects your stealth and dodge (-1)
+Max health: affects your health, duh, (+2)
+Strength: affects your damage (+4)
+Wisdom: affects your knowledge and with high enough wisdom unlocks certain options(0)
+Intelligence: affects your ability to trick people and complete some tasks (-1)
+&lt;/b&gt;
+[[CONFIRM-&gt;HoConfirm]] 
+[[RACES]] 
+]</tw-passagedata><tw-passagedata pid="34" name="FALL ASLEEP" tags="" position="1900,1300" size="100,100"></tw-passagedata><tw-passagedata pid="35" name="SHOUT" tags="" position="3000,1300" size="100,100"></tw-passagedata><tw-passagedata pid="36" name="WALK OVER TO THE WEAPON RACK" tags="" position="900,1600" size="100,100">(if: $inv does not contain &quot;orcish axe&quot;)[
+You walk over to the weapon rack and find an orcish axe. 
+&lt;b style=&quot;color:Yellow;&quot;&gt;Strength: 4 &lt;/b&gt;
+
+(link: &quot;PICK UP THE AXE&quot;)[
+(set: $str to $str + 4)
+(set: $inv to $inv + (a:&quot;orcish axe&quot;)) (go-to: &quot;LOOK AROUND&quot;)
+
+]]
+(else:)[You walk over to the weapon rack and find nothing
+[[LOOK AROUND]] 
+
+]
+</tw-passagedata><tw-passagedata pid="37" name="DEAD" tags="donotshowinventory donotshowstats" position="2250,950" size="100,100">Nice job dying btw did you make a dumb choice and attack an orc? [[BEGINNING]] </tw-passagedata><tw-passagedata pid="38" name="YELL AT THEM" tags="" position="800,1600" size="100,100">One of the orcs notices you yelling and walks over to you. He picks you up by the hair and tells you to shut up.</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
